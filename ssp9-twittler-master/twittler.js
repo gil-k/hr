@@ -1,36 +1,60 @@
 window.tweetCount = 0;
 
-var maxTweetsDisplayed = 15;
+var maxTweetsDisplayed = 20;
 
-function updateTweets() {
-  window.tweetCount = 0;
-  var $container = $('#container');
-  var index = streams.home.length - 1;  
-  var tweetsDisplayed = 0;
-  updateNewTweetCount(window.tweetCount);//streams.users.gilkwak.length);
+function updateTweets(user) {
+  if (user === undefined) {
 
-  $container.html("");
+    window.tweetCount = 0;
+    var $container = $('#container');
+    var index = streams.home.length - 1;  
+    var tweetsDisplayed = 0;
+    // updateNewTweetCount(window.tweetCount);//streams.users.gilkwak.length);
 
-  while(index > 0 && tweetsDisplayed <= maxTweetsDisplayed){
-    tweetsDisplayed++;
-    var tweet = streams.home[index]; streams.users.gilkwak
+    $container.html("");
 
-    var date = new Date();
-    var timeElapsed = timeDifference(date.getTime(), tweet.created_at);
+    while(index > 0 && tweetsDisplayed <= maxTweetsDisplayed){
+      tweetsDisplayed++;
+      var tweet = streams.home[index]; 
 
-    // var $tweet = $('<br><div class="card" id="border"></div>');
-    // $tweet.html('<a href=""><h4 class="card-header bg-muted text-success">' + '@' + tweet.user + 
-    //   '</h4><div class="card-body"><p class="card-text text-muted">' + tweet.message +  '</p><p class="timestamp text-muted">' + timeElapsed + '</p></div></a>');
+      var date = new Date();
+      var timeElapsed = timeDifference(date.getTime(), tweet.created_at);
 
-// <p class="split-para">This text is left. <span>This text is right.</span></p>
+      var user = tweet.user;
+      var $tweet = $('<br><div class="card" id="border"></div>');
+      $tweet.html('<a href="#" onclick="updateTweets(\'' +  tweet.user + '\')"><h4 class="card-header bg-muted text-primary">' + '@' + tweet.user + 
+        '</h4><div class="card-body"><p class="card-text text-muted split-para">' + tweet.message +  '<span class="timestamp text-muted">' + timeElapsed + '</span></p></div></a>');
 
-    var $tweet = $('<br><div class="card" id="border"></div>');
-    $tweet.html('<a href=""><h4 class="card-header bg-muted text-success">' + '@' + tweet.user + 
-      '</h4><div class="card-body"><p class="card-text text-muted split-para">' + tweet.message +  '<span class="timestamp text-muted">' + timeElapsed + '</span></p></div></a>');
+      $tweet.appendTo($container);
+      index -= 1;
+    }      
+  } else {
+    window.tweetCount = 0;
+    var $container = $('#container');
+    var index = streams.home.length - 1;  
+    var tweetsDisplayed = 0;
+    // updateNewTweetCount(window.tweetCount);//streams.users.gilkwak.length);
 
-    $tweet.appendTo($container);
-    index -= 1;
-  }            
+    $container.html("");
+
+    while(index > 0 && tweetsDisplayed <= maxTweetsDisplayed){
+      tweetsDisplayed++;
+      var tweet = streams.home[index]; 
+      if (user === tweet.user){
+        var date = new Date();
+        var timeElapsed = timeDifference(date.getTime(), tweet.created_at);
+
+        var user = tweet.user;
+        var $tweet = $('<br><div class="card" id="border"></div>');
+        $tweet.html('<a href="#" onclick="updateTweets(\'' + tweet.user + '\')"><h4 class="card-header bg-muted text-primary">' + '@' + tweet.user + 
+          '</h4><div class="card-body"><p class="card-text text-muted split-para">' + tweet.message +  '<span class="timestamp text-muted">' + timeElapsed + '</span></p></div></a>');
+
+        $tweet.appendTo($container);        
+      }
+
+      index -= 1;
+    }     
+  }
 }
 
 function updateNewTweetCount(count){
@@ -47,6 +71,10 @@ function updateNewTweetCount(count){
     $tweetCount.html(count + ' new tweets');
   }
   $tweetCount.appendTo($count);
+}
+
+function userTimeLine(user){
+  
 }
 
 function timeDifference(current, previous) {
