@@ -1,0 +1,41 @@
+body {
+    padding-top: 2rem;
+    font-family: "Whitney SSm A","Whitney SSm B","Lucida Grande","Lucida Sans",Verdana,Helvetica,Arial,sans-serif;
+}
+.starter-template {
+    padding: 0rem 0rem;
+    text-align: center;
+}
+.timestamp {
+    text-align: right;
+    font-size: x-small;
+}
+
+.card-header {
+    font-size: large;
+}
+.card-header:hover {
+    color:blue;
+    /*text-decoration: none;     */
+}
+
+.split-para      { display:block;margin:10px;}
+.split-para span { display:block;float:right;width:50%;margin-left:10px;}
+/*a {
+    text-decoration: none;
+}
+
+a:hover { 
+    color:blue; !important
+    text-decoration: none; 
+}*/
+
+
+/*.card-fix {
+  border: 1px solid;
+}*/
+
+/* Even though this is in the bootstrap.css, I have to add it here again for it to work. */
+/*.card-outline-success {
+  border-color: #0275d8;
+}*/
