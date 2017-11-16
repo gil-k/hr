@@ -7,11 +7,14 @@
 window.streams = {};
 streams.home = [];
 streams.users = {};
-streams.users.shawndrost = [];
-streams.users.sharksforcheap = [];
-streams.users.mracus = [];
-streams.users.douglascalhoun = [];
+// streams.users.shawndrost = [];
+// streams.users.sharksforcheap = [];
+// streams.users.mracus = [];
+// streams.users.douglascalhoun = [];
+streams.users.gilkwak = [];
 window.users = Object.keys(streams.users);
+
+window.tweetCount = 0;
 
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
@@ -46,13 +49,17 @@ var generateRandomTweet = function(){
   addTweet(tweet);
 };
 
-for(var i = 0; i < 10; i++){
-  generateRandomTweet();
+var newTweets = 1;
+
+for(var i = 0; i < newTweets; i++){
+  generateRandomTweet( + newTweets);
 }
 
 var scheduleNextTweet = function(){
   generateRandomTweet();
-  setTimeout(scheduleNextTweet, Math.random() * 1500);
+  window.tweetCount += newTweets;
+  updateNewTweetCount(window.tweetCount);
+  setTimeout(scheduleNextTweet, Math.random() * 10000);
 };
 scheduleNextTweet();
 
@@ -67,3 +74,47 @@ var writeTweet = function(message){
   tweet.message = message;
   addTweet(tweet);
 };
+
+var maxTweetsDisplayed = 15;
+
+function updateTweets() {
+  window.tweetCount = 0;
+  var $container = $('#container');
+  var index = streams.home.length - 1;  
+  var tweetsDisplayed = 0;
+  updateNewTweetCount(window.tweetCount);//streams.users.gilkwak.length);
+
+  $container.html("");
+
+  while(index > 0 && tweetsDisplayed <= maxTweetsDisplayed){
+    tweetsDisplayed++;
+    var tweet = streams.home[index]; streams.users.gilkwak
+
+    var date = new Date();
+    var timeElapsed = timeDifference(date.getTime(), tweet.created_at);
+
+    var $tweet = $('<br><div  class="card"></div>');
+    $tweet.html('<h4 class="card-header bg-muted text-success">' + '@' + tweet.user + 
+      '</h4><div class="card-body"><p class="card-text text-muted">' + tweet.message +  '</p><p class="time text-muted">' + timeElapsed + '</p></div>');
+
+    $tweet.appendTo($container);
+    index -= 1;
+  }            
+}
+
+function updateNewTweetCount(count){
+  // alert('new tweets');
+
+  var $count = $('#count');
+  $count.html("");
+
+  var $tweetCount = $('<div class="text-muted" id="tweetCount"></div>');
+  // $tweetCount.html(streams.users.gilkwak.length);
+  if (count === 1){
+    $tweetCount.html(count + ' new tweet');
+  } else {
+    $tweetCount.html(count + ' new tweets');
+  }
+  $tweetCount.appendTo($count);
+}
+
