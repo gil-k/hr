@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+<body>
+<div class="mocha1">
+  <div class="mocha2a">mocha2a</div>
+  <div class="mocha2b">
+    <div class="mocha3a">mocha3a</div>
+    <div class="mocha3b">mocha3b</div>
+  </div>
+</div>
+
+<script>
+
+var getElementsByClassName = function(className) {
+  var result = [];
+
+  function helper(element, result) {
+    var children = element.children;
+    var parts = element.className.split(' ');
+    if(parts.indexOf(className) >= 0){
+      result.push(element);
+    }
+    for(var i = 0; i < children.length; i++) {
+      helper(children[i], result);
+    }
+  }
+
+  helper(document.body, result);
+  return result;
+};    
+
+var node = document.getElementsByClassName("mocha1")[0];//.className;
+alert('input node has class name of ' + node.className);
+
+var output = getElementsByClassName("mocha3b", node);
+alert('output array is ' + output + ' and contains ' + output[0].className + ' node');
+
+</script>
+
+</body>
+</html>

@@ -4,7 +4,23 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-) {
-  // your code here
-};
+
+var getElementsByClassName = function(className) {
+  var result = [];
+
+  function helper(element, result) {
+    var children = element.children;
+    var parts = element.className.split(' ');
+    if(parts.indexOf(className) >= 0){
+      result.push(element);
+    }
+    for(var i = 0; i < children.length; i++) {
+      helper(children[i], result);
+    }
+  }
+
+  helper(document.body, result);
+  return result;
+};    
+
+

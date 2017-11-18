@@ -4,9 +4,6 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-    // if (Array.isArray(obj)){
-    //     console.log('          here is an Array');
-    // }
     if (obj === null) {
         return 'null';
     }    
@@ -14,19 +11,12 @@ var stringifyJSON = function(obj) {
         return;
     }
 
-    if (typeof obj === 'string') {
-            if (obj === 'foo'){
-                console.log('                                           foo ' + obj.length);
-            }        
+    if (typeof obj === 'string') {     
         return '"' + obj + '"';
     }    
-    if (typeof obj === 'number') {
+    if (typeof obj === 'number' || obj === true || obj === false) {
         return obj.toString();
     }
-    if (obj === true || obj === false) {
-        return obj.toString();
-    }
-
 
     var result = [];
     if (Array.isArray(obj)){
@@ -47,43 +37,5 @@ var stringifyJSON = function(obj) {
         return '{' + result + '}';
     }
 };
-var stringifiableObjects = [
-  9,
-  null,
-  true,
-  false,
-  'Hello world',
-  [],
-  [8],
-  ['hi'],
-  [8, 'hi'],
-  [1, 0, -1, -0.3, 0.3, 1343.32, 3345, 0.00011999999999999999],
-  [8, [[], 3, 4]],
-  [[[['foo']]]],
-  {},
-  {'a': 'apple'},
-  {'foo': true, 'bar': false, 'baz': null},
-  {'boolean, true': true, 'boolean, false': false, 'null': null },
-  // basic nesting
-  {'a': {'b': 'c'}},
-  {'a': ['b', 'c']},
-  [{'a': 'b'}, {'c': 'd'}],
-  {'a': [], 'c': {}, 'b': true}
-];
 
-stringifiableObjects.forEach(function(obj){
-    console.log(stringifyJSON(obj));
-})
-// console.log(typeof null.toString() === 'string');
-/*
-{} -> '{' + f() + '}'
-[] -> '[' + f() + ']'
-key:value -> key/value
-true/false -> 'true'/'false'
-string -> string
-number -> string
-undefined, function(){}, Symbol('') -> null
-x:undefined, x:Object, z:Symbol('') -> omit
-Symbol('foo') -> 'foo'
-
-*/
+console.log(stringifyJSON([8, 'hi'],));
