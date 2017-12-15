@@ -1,0 +1,4 @@
+// Put your YouTube API keys here!
+//window.YOUTUBE_API_KEY = 'YOUR_API_KEY_HERE';
+"use strict";
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9jb25maWcveW91dHViZS5leGFtcGxlLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0EiLCJmaWxlIjoieW91dHViZS5leGFtcGxlLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gUHV0IHlvdXIgWW91VHViZSBBUEkga2V5cyBoZXJlIVxuLy93aW5kb3cuWU9VVFVCRV9BUElfS0VZID0gJ1lPVVJfQVBJX0tFWV9IRVJFJztcbiJdfQ==
